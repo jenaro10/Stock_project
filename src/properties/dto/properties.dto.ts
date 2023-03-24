@@ -1,4 +1,5 @@
 export class CreatePropertyDTO {
+    id: string;
     name: string;
     description: string;
     serialNumber?: string
