@@ -1,4 +1,3 @@
-
 interface PropertiesDTO {
     name: string
     price: number
