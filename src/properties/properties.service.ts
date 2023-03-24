@@ -7,5 +7,5 @@ import { CreatePropertyDTO } from "./dto/properties.dto";
 @Injectable()
 export class PropertiesService {
 
-    constructor(@InjectModel('Properties') propertyModel: Model<Property>){}
+    constructor(@InjectModel('Properties') private readonly propertyModel: Model<Property>){}
 }
