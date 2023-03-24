@@ -1,10 +1,9 @@
-export class CreatePropertyDTO {
+export interface Property {
     name: string;
-    description: string;
     serialNumber?: string
+    description: string;
     imageURL: string;
     price: number;
     movable: boolean;
     electronic: boolean;
 }
-

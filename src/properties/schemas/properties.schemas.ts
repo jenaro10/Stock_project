@@ -6,4 +6,5 @@ export const PropertiesSchema = new Schema({
     imageURL: {type: String, required: true},
     price: {type: Number, required: true},
     movable: {type: Boolean, required: true},
+    electronic: {type: Boolean, required: true}
 });
