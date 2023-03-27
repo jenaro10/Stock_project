@@ -10,9 +10,8 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
         super();
     }
     //This gonna validate if the user that we passed into the body matches with our "database" and exists
-    async validate(userID: string): Promise<any>{
-        const user = await this.authService.validateUser(userID);
-
+    async validate(username: string, password: string): Promise<any>{
+        const user = await this.authService.validateUser(username, password);
         if (!user){
             throw new UnauthorizedException();
         }

@@ -7,14 +7,15 @@ export class AuthService {
     constructor(private usersService: UsersService, private jwtService: JwtService){}
 
     //If we find a username, we are gonna take out all the information about it and show it
-    async validateUser(userID: string): Promise<any>{
-        const user = await this.usersService.getUser(userID)
-
-        if (user){
-            const {password, username,...rest} = user
+    async validateUser( username: string, password: string): Promise<any>{
+        // console.log(typeof username, typeof password)
+        // const user = await this.usersService.getUser(userID)
+        const user2 = await this.usersService.getUserInfo(username)
+        if (user2.username === username && user2.password === password){
+            console.log("passed!")
+            const {password, username,...rest} = user2
             return rest;
         }
-
         return null;
     }
 

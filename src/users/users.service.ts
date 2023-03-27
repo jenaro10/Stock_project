@@ -5,14 +5,6 @@ import { InjectModel } from "@nestjs/mongoose";
 import { UserInterface } from "./interfaces/user.interface";
 import { CreateUserDTO } from "./dto/users.dto";
 
-//This is the user structure or fields to save in a db.
-export type User = {
-    id: number;
-    name: string;
-    username: string;
-    password: string;
-}
-
 @Injectable()
 export class UsersService {
     //This is the Mongodb connection
@@ -33,6 +25,11 @@ export class UsersService {
 
     async getUser(userID: string): Promise<UserInterface> {
         const user = await this.userModel.findById(userID)
+        return user
+    }
+
+    async getUserInfo(usernameGived: string): Promise<UserInterface> {
+        const user = await this.userModel.findOne({username: usernameGived})
         return user
     }
 
