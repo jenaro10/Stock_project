@@ -9,14 +9,6 @@ import { CreateUserDTO } from "./dto/users.dto";
 export class UsersService {
     //This is the Mongodb connection
     constructor(@InjectModel('Users') private readonly userModel: Model<UserInterface>){}
-    // private readonly users: User[] = [
-    //     {
-    //         id: 1,
-    //         name: 'sebas',
-    //         username: process.env.USERNAME,
-    //         password: process.env.PASSWORD
-    //     },
-    // ];
 
     async getUsers(): Promise<UserInterface[]> {
         const users = await this.userModel.find() //This find method is from mongoose
@@ -30,7 +22,7 @@ export class UsersService {
 
     async getUserInfo(usernameGived: string): Promise<UserInterface> {
         const user = await this.userModel.findOne({username: usernameGived})
-        return user
+        return user.toObject()
     }
 
     createUser(createUserDTO: CreateUserDTO): Promise<UserInterface> {
@@ -39,7 +31,7 @@ export class UsersService {
     }
 
     async deleteUser(userID: string): Promise<UserInterface> {
-        const userDeleted = await this.userModel.findByIdAndDelete(userID)
+        const userDeleted = (await this.userModel.findByIdAndDelete(userID))
         return userDeleted
     }
 
