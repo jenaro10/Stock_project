@@ -31,7 +31,8 @@ export class UsersService {
     }
 
     async deleteUser(userID: string): Promise<UserInterface> {
-        const userDeleted = (await this.userModel.findByIdAndDelete(userID))
+        const userDeleted = await this.userModel.findByIdAndDelete(userID)
+        console.log(userID, userDeleted)
         return userDeleted
     }
 
@@ -39,8 +40,4 @@ export class UsersService {
         const updatedUser = await this.userModel.findByIdAndUpdate(userID, createUserDTO, {new: true})
         return updatedUser;
     }
-
-    // async findOne(username: string): Promise<User | undefined>{
-    //     return this.users.find(user => user.username === username);
-    // }
 }

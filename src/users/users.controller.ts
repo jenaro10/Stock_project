@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, NotFoundException, Post, Query, Res } from '@nestjs/common';
 import { CreateUserDTO } from './dto/users.dto';
 import { UserInterface } from './interfaces/user.interface';
 import { UsersService } from "./users.service";
@@ -25,6 +25,16 @@ export class UsersController {
         res.status(HttpStatus.OK).json({
             message: 'received',
             users
+        })
+    }
+
+    @Delete('/delete')
+    async deleteUser(@Res() res, @Query('userID') userID) {
+        const user = await this.userService.deleteUser(userID)
+        if (!user) throw new NotFoundException('User does not exists')
+        return res.status(HttpStatus.OK).json({
+            message: 'User deleted succesfully',
+            user
         })
     }
 
