@@ -4,6 +4,8 @@ declare global {
             USERNAME: string
             PASSWORD: string
             SECRET: string
+            MONGO_URI: string
+            MONGO_DB: string
             NODE_ENV: 'development' | 'production'
         }
     }
