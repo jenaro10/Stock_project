@@ -1,13 +1,26 @@
-import { Schema } from "mongoose";
+import { Prop, raw, SchemaFactory } from "@nestjs/mongoose";
+import { Document, Schema } from "mongoose";
 
-export const PropertiesSchema = new Schema({
-    name: {type: String, required: true},
-    description: {type: String, required: true},
-    imageURL: {type: String, required: true},
-    price: {type: Number, required: true},
-    movable: {type: Number, required: true}
-    }
-);
+export class PropertiesSchema extends Document {
+    @Prop({required: true})
+    name: String
+
+    @Prop({required: true})
+    description: String
+
+    @Prop({required: true})
+    imageURL: String
+
+    @Prop({required: true})
+    price: Number
+
+    @Prop(
+        raw({
+
+        })
+    )
+    movable: Record<string, any>
+}
 
 
 
@@ -50,18 +63,4 @@ class Projector {
     serialNumber: String
 }
 
-// export const schema = new Schema({
-//     id: String,
-//     name: String,
-//     description: String,
-//     imageURL: String,
-//     price: Number,
-//     movable: {
-//         electronic: Type,
-//         furniture: [Chair, Sofa, Table, Lamp]
-//     },
-//     nonMovable: {
-//         building: []
-//     },
-// }
-// )
+export const PropSchema = SchemaFactory.createForClass(PropertiesSchema)
